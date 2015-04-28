@@ -9,4 +9,8 @@ public enum PackageSize {
 		this.value = value;
 	}
 
+	public int getValue() {
+		return value;
+	}
+
 }

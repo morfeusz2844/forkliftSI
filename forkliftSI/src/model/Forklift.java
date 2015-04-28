@@ -7,6 +7,8 @@ public class Forklift {
 	private int positionX;
 	private int positionY;
 
+	private int capacity;
+
 	private int fuelLevel;
 
 	public Forklift() {
@@ -50,6 +52,14 @@ public class Forklift {
 
 	public void setFuelLevel(int fuelLevel) {
 		this.fuelLevel = fuelLevel;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 }
