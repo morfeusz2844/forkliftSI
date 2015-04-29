@@ -5,8 +5,11 @@ import model.enums.PackageSize;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorageRack extends WorldElement {
+public class StorageRack implements WorldElement {
+
+
 	private static final int MAX_CAPACITY = 20;
+	private static final String TYPE = "StorageRack";
 	private int leftSpace;
 
 	List<Package> items;
@@ -34,4 +37,8 @@ public class StorageRack extends WorldElement {
 		return leftSpace;
 	}
 
+	@Override
+	public String getType() {
+			return TYPE;
+	}
 }

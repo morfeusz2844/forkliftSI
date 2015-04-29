@@ -5,8 +5,10 @@ import model.enums.PackageSize;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ground extends WorldElement {
+public class Ground implements WorldElement {
 	private static final int MAX_CAPACITY = 5;
+	private static final String TYPE = "Ground";
+
 
 	private int leftSpace;
 
@@ -31,5 +33,10 @@ public class Ground extends WorldElement {
 			items.add(pack);
 			leftSpace--;
 		}
+	}
+
+	@Override
+	public String getType() {
+		return TYPE;
 	}
 }

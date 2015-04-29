@@ -1,6 +1,7 @@
 package model;
 
 public class Warehouse {
+
 	private final int SIZE_X = 15;
 	private final int SIZE_Y = 15;
 

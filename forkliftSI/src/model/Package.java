@@ -3,7 +3,9 @@ package model;
 import model.enums.PackageSize;
 import model.enums.PackageType;
 
-public class Package {
+public class Package implements WorldElement {
+	private static final String TYPE = "Package";
+
 	private final PackageSize packageSize;
 	private final PackageType packageType;
 
@@ -20,4 +22,8 @@ public class Package {
 		return packageType;
 	}
 
+	@Override
+	public String getType() {
+		return TYPE;
+	}
 }

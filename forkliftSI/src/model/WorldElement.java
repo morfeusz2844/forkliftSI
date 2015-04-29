@@ -1,5 +1,7 @@
 package model;
 
-public abstract class WorldElement {
+public interface WorldElement {
+
+    public String getType();
 
 }
