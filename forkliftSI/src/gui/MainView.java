@@ -29,7 +29,7 @@ public class MainView {
 
     JButton refresh = new JButton("Odswiez");
     Container infoPlace = new Container();
-    JTextArea logPlace = new JTextArea(20,40);
+    JTextArea logPlace = new JTextArea(20, 40);
 
     public MainView() {
         EventQueue.invokeLater(new Runnable() {
