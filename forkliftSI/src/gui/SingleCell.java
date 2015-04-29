@@ -1,11 +1,9 @@
 package gui;
 
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JPanel;
 
 public class SingleCell extends JPanel {
 
@@ -30,6 +28,10 @@ public class SingleCell extends JPanel {
             }
         });
     }
+
+    public void setBlankPositionHere() {setBackground(new Color(150, 250, 50));}
+
+    public void setPackagePositionHere() {setBackground(new Color(255,50,50));}
 
     public void setForkliftPositionHere() {
         setBackground(new Color(150, 25, 100));
