@@ -1,11 +1,11 @@
 package model;
 
+import model.enums.PackageSize;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import model.enums.PackageSize;
-
-public class StorageRack implements Point {
+public class StorageRack extends WorldElement {
 	private static final int MAX_CAPACITY = 20;
 	private int leftSpace;
 

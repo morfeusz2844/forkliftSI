@@ -1,13 +1,11 @@
 package model;
 
+import model.enums.PackageSize;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.naming.OperationNotSupportedException;
-
-import model.enums.PackageSize;
-
-public class Ground implements Point {
+public class Ground extends WorldElement {
 	private static final int MAX_CAPACITY = 5;
 
 	private int leftSpace;
