@@ -13,17 +13,14 @@ public class MainView {
     GridPanel gridPanel = new GridPanel();
     static Forklift forklift = new Forklift();
 
-    JLabel forkliftStateLabel = new JLabel("-- Stan poczƒÖtkowy w√≥zka -- ");
+    JLabel forkliftStateLabel = new JLabel("-- Stan poczπtkowy wÛzka -- ");
     JLabel fuelLevelLabel = new JLabel("Poziom paliwa : ");
     public static JLabel fuelLevel = new JLabel(Integer.toString(forklift.getFuelLevel()));
-    JLabel capacityLevelLabel = new JLabel("Obecne za≈Çadowanie : ");
+    JLabel capacityLevelLabel = new JLabel("Obecne za≥adowanie : ");
     public static JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()));
 
     JButton refresh = new JButton("Odswiez");
-
-    Container infoPlace = new Container();
     JTextArea logPlace = new JTextArea(20,40);
-
 
     public MainView() {
         EventQueue.invokeLater(new Runnable() {
@@ -35,9 +32,9 @@ public class MainView {
                 }
 
                 initializeListeners();
-                //JScrollPane scroll = new JScrollPane(logPlace);
-                //logPlace.setEditable(false);
-                JFrame frame = new JFrame("Inteligentny W√≥zek wid≈Çowy");
+                JScrollPane scroll = new JScrollPane(logPlace);
+                logPlace.setEditable(false);
+                JFrame frame = new JFrame("Inteligentny WÛzek wid≥owy");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new MigLayout());
 
