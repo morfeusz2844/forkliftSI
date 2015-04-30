@@ -54,6 +54,6 @@ public class SingleCell extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension(65, 65);
+        return new Dimension(40, 40);
     }
 }

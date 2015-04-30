@@ -35,7 +35,6 @@ public class GridPanel extends JPanel {
                 gbc.gridy = row;
 
                 cellPanel[row][col] = (new SingleCell());
-                cellPanel[row][col].setPreferredSize(new Dimension(50,50));
                 border = new MatteBorder(1, 1, 1, 1, Color.GRAY);
                 cellPanel[row][col].setBorder(border);
                 add(cellPanel[row][col], gbc);
@@ -69,5 +68,7 @@ public class GridPanel extends JPanel {
             }
         }
     }
+
+
 
 }
