@@ -20,7 +20,7 @@ public class MainView {
     public static JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()));
 
     JButton refresh = new JButton("Odswiez");
-    JTextArea logPlace = new JTextArea(20,40);
+    //JTextArea logPlace = new JTextArea(20,40);
 
     public MainView() {
         EventQueue.invokeLater(new Runnable() {
@@ -32,8 +32,8 @@ public class MainView {
                 }
 
                 initializeListeners();
-                JScrollPane scroll = new JScrollPane(logPlace);
-                logPlace.setEditable(false);
+                //JScrollPane scroll = new JScrollPane(logPlace);
+                //logPlace.setEditable(false);
                 JFrame frame = new JFrame("Inteligentny Wózek wid³owy");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new MigLayout());
