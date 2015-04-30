@@ -1,9 +1,6 @@
 package gui;
 
-import model.*;
-import model.Package;
-import model.enums.PackageSize;
-import model.enums.PackageType;
+import model.Warehouse;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,8 +17,7 @@ public class GridPanel extends JPanel {
     public GridPanel() {
 
 		this.warehouse = new Warehouse();
-		warehouse.addWorldElement(new Blank(),0,0);
-		warehouse.addWorldElement(new Package(PackageSize.BIG, PackageType.DANGEROUS),1,1);
+		warehouse.initializeRandomizedWarehouseMap();
 		cellPanel = new SingleCell[warehouse.getSizeX()][warehouse.getSizeY()];
 
         initializeGridView();
@@ -52,13 +48,14 @@ public class GridPanel extends JPanel {
         for (int i = 0; i < warehouse.getSizeX(); i++) {
             for (int j = 0; j < warehouse.getSizeY(); j++) {
 
-				String objectType = warehouse.getWorldElement(i,j).getType();
-				if (objectType.equals("Package"))
-					cellPanel[i][j].setPackagePositionHere();
-				if (objectType.equals("Blank"))
-					cellPanel[i][j].setBlankPositionHere();
-
-                cellPanel[i][j].add(new JLabel("     "));
+                String objectType = warehouse.getWorldElement(i, j).getType();
+                cellPanel[i][j].add(new JLabel(objectType));
+                if (objectType.equals("Package")){
+                    cellPanel[i][j].setPackagePositionHere();}
+                else if (objectType.equals("Blank")){
+                    cellPanel[i][j].setBlankPositionHere();}
+                else if (objectType.equals("StorageRack")){
+                    cellPanel[i][j].setStorageRackPositionHere();}
             }
         }
     }

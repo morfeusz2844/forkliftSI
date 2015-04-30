@@ -20,8 +20,10 @@ public class MainView {
     public static JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()));
 
     JButton refresh = new JButton("Odswiez");
-    //Container infoPlace = new Container();
-    //JTextArea logPlace = new JTextArea(20,40);
+
+    Container infoPlace = new Container();
+    JTextArea logPlace = new JTextArea(20,40);
+
 
     public MainView() {
         EventQueue.invokeLater(new Runnable() {

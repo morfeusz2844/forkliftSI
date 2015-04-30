@@ -41,6 +41,10 @@ public class Forklift implements WorldElement {
 
 	}
 
+	public void dropElement(){
+
+	}
+
 	public int getPositionX() {
 		return positionX;
 	}
