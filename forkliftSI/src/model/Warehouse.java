@@ -42,22 +42,12 @@ public class Warehouse {
                     } else {
                         warehouseMap[i][j] = new Ramp();
                     }
+                } else if (i > 1 && (j == 0 || j == 2 || j == 3 || j == 5 || j == 6)) {
+                    warehouseMap[i][j] = new StorageRack();
+                }else if (i==1 || (i>1 && (j==1||j==4||j==7)) || ((i==4 || i==7 || i==10 || i==13) && j>7)){
+                    warehouseMap[i][j] = new Road();
                 } else {
-                    int temp = rand.nextInt(3);
-                    switch (temp) {
-                        case 0: {
-                            warehouseMap[i][j] = new Blank();
-                            break;
-                        }
-                        case 1: {
-                            warehouseMap[i][j] = new Package(PackageSize.SMALL, PackageType.DANGEROUS);
-                            break;
-                        }
-                        case 2: {
-                            warehouseMap[i][j] = new StorageRack();
-                            break;
-                        }
-                    }
+                    warehouseMap[i][j] = new Blank();
                 }
             }
         }

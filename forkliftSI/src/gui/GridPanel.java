@@ -48,6 +48,8 @@ public class GridPanel extends JPanel {
                     cellPanel[i][j].setServicePositionHere();
                 } else if (objectType.equals("Ramp")){
                     cellPanel[i][j].setRampPositionHere();
+                } else if (objectType.equals("Road")){
+                    cellPanel[i][j].setRoadPositionHere();
                 }
             }
         }
