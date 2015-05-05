@@ -37,11 +37,9 @@ public class MainView {
 
                 logPlace.setText("--Start Application ForkliftSI--");
 
-                gridPanel.setMaximumSize(new Dimension(600,600));
                 JFrame frame = new JFrame("Inteligentny Wózek wid³owy");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setLayout(new MigLayout());
-
                 frame.add(forkliftStateLabel, "cell 0 0");
                 frame.add(fuelLevelLabel, "cell 0 1");
                 frame.add(fuelLevel, "w 80!, cell 0 1");

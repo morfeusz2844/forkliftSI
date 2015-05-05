@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -11,6 +13,11 @@ public class SingleCell extends JPanel {
     private Color defaultBackground;
 
     public SingleCell() {
+        setMinimumSize(new Dimension(50,50));
+        setPreferredSize(new Dimension(50, 50));
+        setMaximumSize(new Dimension(50, 50));
+        setBorder(new MatteBorder(1, 1, 1, 1, Color.GRAY));
+
         initializeMouseListener();
     }
 
@@ -48,12 +55,8 @@ public class SingleCell extends JPanel {
         validate();
     }
 
+
     public void setAlgoritmPositionHere() {
         setBackground(new Color(120, 165, 100));
-    }
-
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(40, 40);
     }
 }
