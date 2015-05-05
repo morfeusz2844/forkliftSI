@@ -36,13 +36,18 @@ public class GridPanel extends JPanel {
         for (int i = 0; i < warehouse.getSizeX(); i++) {
             for (int j = 0; j < warehouse.getSizeY(); j++) {
                 String objectType = warehouse.getWorldElement(i, j).getType();
-                cellPanel[i][j].add(new JLabel(objectType));
+                cellPanel[i][j].setToolTipText(objectType);
+
                 if (objectType.equals("Package")) {
                     cellPanel[i][j].setPackagePositionHere();
                 } else if (objectType.equals("Blank")) {
                     cellPanel[i][j].setBlankPositionHere();
                 } else if (objectType.equals("StorageRack")) {
                     cellPanel[i][j].setStorageRackPositionHere();
+                } else if (objectType.equals("Service")){
+                    cellPanel[i][j].setServicePositionHere();
+                } else if (objectType.equals("Ramp")){
+                    cellPanel[i][j].setRampPositionHere();
                 }
             }
         }

@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.MatteBorder;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -13,7 +12,7 @@ public class SingleCell extends JPanel {
     private Color defaultBackground;
 
     public SingleCell() {
-        setMinimumSize(new Dimension(50,50));
+        setMinimumSize(new Dimension(50, 50));
         setPreferredSize(new Dimension(50, 50));
         setMaximumSize(new Dimension(50, 50));
         setBorder(new MatteBorder(1, 1, 1, 1, Color.GRAY));
@@ -36,11 +35,25 @@ public class SingleCell extends JPanel {
         });
     }
 
-    public void setBlankPositionHere() {setBackground(new Color(150, 250, 50));}
+    public void setServicePositionHere() {
+        setBackground(new Color(255, 255, 10));
+    }
 
-    public void setPackagePositionHere() {setBackground(new Color(255,50,50));}
+    public void setRampPositionHere() {
+        setBackground(new Color(0, 255, 255));
+    }
 
-    public void setStorageRackPositionHere() {setBackground(new Color(10,10,90));}
+    public void setBlankPositionHere() {
+        setBackground(new Color(150, 250, 50));
+    }
+
+    public void setPackagePositionHere() {
+        setBackground(new Color(255, 50, 50));
+    }
+
+    public void setStorageRackPositionHere() {
+        setBackground(new Color(10, 10, 90));
+    }
 
     public void setForkliftPositionHere() {
         setBackground(new Color(150, 25, 100));
@@ -54,7 +67,6 @@ public class SingleCell extends JPanel {
         setBackground(defaultBackground);
         validate();
     }
-
 
     public void setAlgoritmPositionHere() {
         setBackground(new Color(120, 165, 100));

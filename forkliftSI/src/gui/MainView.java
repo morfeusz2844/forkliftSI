@@ -13,56 +13,51 @@ public class MainView {
     GridPanel gridPanel = new GridPanel();
     static Forklift forklift = new Forklift();
 
-    JLabel forkliftStateLabel = new JLabel("-- Stan pocz¹tkowy wózka -- ");
-    JLabel fuelLevelLabel = new JLabel("Poziom paliwa : ");
-    public static JLabel fuelLevel = new JLabel(Integer.toString(forklift.getFuelLevel()));
-    JLabel capacityLevelLabel = new JLabel("Obecne za³adowanie : ");
-    public static JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()));
-
-    JButton refresh = new JButton("Odswiez");
-    JTextArea logPlace = new JTextArea(20,40);
+    JTextArea logPlace = new JTextArea(20, 40);
 
     public MainView() {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                }
-
-                initializeListeners();
-                JScrollPane scroll = new JScrollPane(logPlace);
-                logPlace.setEditable(false);
-
-                logPlace.setText("--Start Application ForkliftSI--");
-
-                JFrame frame = new JFrame("Inteligentny Wózek wid³owy");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setLayout(new MigLayout());
-                frame.add(forkliftStateLabel, "cell 0 0");
-                frame.add(fuelLevelLabel, "cell 0 1");
-                frame.add(fuelLevel, "w 80!, cell 0 1");
-                frame.add(capacityLevelLabel, "cell 0 2");
-                frame.add(capacityLevel, "cell 0 2");
-                frame.add(refresh, "cell 0 9, wrap");
-                frame.add(logPlace, "east");
-                frame.add(gridPanel, "east");
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+        EventQueue.invokeLater(() -> {
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             }
+
+            logPlace.setEditable(false);
+
+            logPlace.setText("--Start Application ForkliftSI-- \n DUPA");
+
+            JFrame frame = new JFrame("Inteligent ForkLift");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setLayout(new MigLayout());
+            frame.add(initializerLeftPanel(), "west");
+            frame.add(logPlace, "east");
+            frame.add(gridPanel, "east");
+            frame.pack();
+            frame.setLocationRelativeTo(null);
+            frame.setVisible(true);
         });
     }
 
-    private void initializeListeners() {
+    private JPanel initializerLeftPanel(){
+        JPanel panel = new JPanel(new FlowLayout());
+        JLabel forkliftStateLabel = new JLabel("-- Information about forklift -- ",JLabel.CENTER);
+        JLabel fuelLevelLabel = new JLabel("Fuel level : ",JLabel.LEFT);
+        JLabel fuelLevel = new JLabel(Integer.toString(forklift.getFuelLevel()),JLabel.RIGHT);
+        JLabel capacityLevelLabel = new JLabel("Actual loading : ",JLabel.LEFT);
+        JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()),JLabel.RIGHT);
 
-        refresh.addActionListener(new ActionListener() {
+        JButton refresh = new JButton("Refresh");
 
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                gridPanel.clearGridView();
-            }
-        });
+        refresh.addActionListener(e -> gridPanel.clearGridView());
+        panel.setPreferredSize(new Dimension(200, 700));
+        panel.setMaximumSize(new Dimension(200, 700));
+        panel.add(forkliftStateLabel);
+        panel.add(fuelLevelLabel);
+        panel.add(fuelLevel);
+        panel.add(capacityLevelLabel);
+        panel.add(capacityLevel);
+        panel.add(refresh);
+        return panel;
     }
+
 }
