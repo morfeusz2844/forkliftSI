@@ -12,9 +12,8 @@ public class GridPanel extends JPanel {
 
     SingleCell cellPanel[][];
 
-    public GridPanel() {
-        this.warehouse = new Warehouse();
-        warehouse.initializeRandomizedWarehouseMap();
+    public GridPanel(Warehouse warehouse) {
+        this.warehouse = warehouse;
         cellPanel = new SingleCell[warehouse.getSizeX()][warehouse.getSizeY()];
         initializeGridView();
         initializeGeneratedData();
@@ -63,4 +62,6 @@ public class GridPanel extends JPanel {
             }
         }
     }
+
+
 }

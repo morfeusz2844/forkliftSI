@@ -1,6 +1,7 @@
 package gui;
 
 import model.Forklift;
+import model.Warehouse;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -10,17 +11,22 @@ import java.awt.event.ActionListener;
 
 public class MainView {
 
-    GridPanel gridPanel = new GridPanel();
-    static Forklift forklift = new Forklift();
+    Warehouse warehouse;
+    GridPanel gridPanel;
+    Forklift forklift;
 
     JTextArea logPlace = new JTextArea(20, 40);
 
-    public MainView() {
-        EventQueue.invokeLater(() -> {
+    public MainView(Warehouse warehouse, Forklift forklift) {
+        this.warehouse = warehouse;
+        this.forklift = forklift;
+        this.gridPanel = new GridPanel(this.warehouse);
+        SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             }
+
 
             logPlace.setEditable(false);
 
@@ -35,18 +41,26 @@ public class MainView {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+
         });
     }
 
-    private JPanel initializerLeftPanel(){
+    private JPanel initializerLeftPanel() {
         JPanel panel = new JPanel(new FlowLayout());
-        JLabel forkliftStateLabel = new JLabel("-- Information about forklift -- ",JLabel.CENTER);
-        JLabel fuelLevelLabel = new JLabel("Fuel level : ",JLabel.LEFT);
-        JLabel fuelLevel = new JLabel(Integer.toString(forklift.getFuelLevel()),JLabel.RIGHT);
-        JLabel capacityLevelLabel = new JLabel("Actual loading : ",JLabel.LEFT);
-        JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()),JLabel.RIGHT);
+        JLabel forkliftStateLabel = new JLabel("-- Information about forklift -- ", JLabel.CENTER);
+        JLabel fuelLevelLabel = new JLabel("Fuel level : ", JLabel.LEFT);
+        JLabel fuelLevel = new JLabel(Integer.toString(forklift.getFuelLevel()), JLabel.RIGHT);
+        JLabel capacityLevelLabel = new JLabel("Actual loading : ", JLabel.LEFT);
+        JLabel capacityLevel = new JLabel(Integer.toString(forklift.getCapacity()), JLabel.RIGHT);
 
         JButton refresh = new JButton("Refresh");
+        refresh.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gridPanel.initializeGeneratedData();
+                logPlace.append("DUUUPA\n");
+            }
+        });
 
         refresh.addActionListener(e -> gridPanel.clearGridView());
         panel.setPreferredSize(new Dimension(200, 700));

@@ -1,8 +1,5 @@
 package model;
 
-import model.enums.PackageSize;
-import model.enums.PackageType;
-
 import java.util.Random;
 
 public class Warehouse {
@@ -24,7 +21,7 @@ public class Warehouse {
         initializeWarehouseMap();
     }
 
-    private void initializeWarehouseMap() {
+    private void initializeBlankWarehouseMap() {
         for (int i = 0; i < SIZE_X; i++) {
             for (int j = 0; j < SIZE_Y; j++) {
                 warehouseMap[i][j] = new Blank();
@@ -32,7 +29,7 @@ public class Warehouse {
         }
     }
 
-    public void initializeRandomizedWarehouseMap() {
+    public void initializeWarehouseMap() {
         Random rand = new Random();
         for (int i = 0; i < SIZE_X; i++) {
             for (int j = 0; j < SIZE_Y; j++) {
