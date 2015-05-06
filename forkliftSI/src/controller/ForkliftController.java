@@ -1,6 +1,6 @@
 package controller;
 
-import model.Blank;
+import controller.Dijkstra2.Pathfinder;
 import model.Forklift;
 import model.Warehouse;
 
@@ -19,20 +19,12 @@ public class ForkliftController implements Runnable {
 
         //test wyœwietlania
 
-        warehouse.addWorldElement(new Blank(), 3, 3);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        warehouse.addWorldElement(new Blank(), 3, 4);
-        try {
-            Thread.sleep(50000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        warehouse.addWorldElement(new Blank(), 4, 4);
+        Pathfinder pathfinder = new Pathfinder(warehouse);
+        pathfinder.findPath();
+
     }
+
+
 
 
 }

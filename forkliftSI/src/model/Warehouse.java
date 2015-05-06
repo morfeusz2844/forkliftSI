@@ -41,7 +41,7 @@ public class Warehouse {
                     }
                 } else if (i > 1 && (j == 0 || j == 2 || j == 3 || j == 5 || j == 6)) {
                     warehouseMap[i][j] = new StorageRack();
-                }else if (i==1 || (i>1 && (j==1||j==4||j==7)) || ((i==4 || i==7 || i==10 || i==13) && j>7)){
+                } else if (i == 1 || (i > 1 && (j == 1 || j == 4 || j == 7)) || ((i == 4 || i == 7 || i == 10 || i == 13) && j > 7)) {
                     warehouseMap[i][j] = new Road();
                 } else {
                     warehouseMap[i][j] = new Blank();
@@ -55,7 +55,21 @@ public class Warehouse {
     }
 
     public WorldElement getWorldElement(int positionX, int positionY) {
-        return warehouseMap[positionX][positionY];
+        if (positionX >= 0 && positionX < SIZE_X && positionY >= 0 && positionY < SIZE_Y)
+            return warehouseMap[positionX][positionY];
+        else return new Blank();
+    }
+
+    public String[] getPassableAdjacencies(int x, int y){
+
+        String[] adjacencies = new String[4];
+
+        if (this.getWorldElement(x - 1, y).isPassable()) adjacencies[0] = this.getWorldElement(x - 1, y).getType() + " " + String.valueOf(x - 1) + " " + (y);
+        if (this.getWorldElement(x, y - 1).isPassable()) adjacencies[1] = this.getWorldElement(x, y - 1).getType() + " " + (x) + " " + String.valueOf(y - 1);
+        if (this.getWorldElement(x, y + 1).isPassable()) adjacencies[2] = this.getWorldElement(x, y + 1).getType() + " " + (x) + " " + String.valueOf(y + 1);
+        if (this.getWorldElement(x + 1, y).isPassable()) adjacencies[3] = this.getWorldElement(x + 1, y).getType() + " " + String.valueOf(x + 1) + " " + (y);
+
+        return adjacencies;
     }
 }
 

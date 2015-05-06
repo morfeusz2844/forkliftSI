@@ -42,6 +42,7 @@ public class SingleCell extends JPanel {
     public void setRampPositionHere() {
         setBackground(new Color(0, 255, 255));
     }
+
     public void setRoadPositionHere(){setBackground(new Color(0,0,0));}
 
     public void setBlankPositionHere() {

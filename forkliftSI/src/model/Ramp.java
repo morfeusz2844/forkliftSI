@@ -10,4 +10,11 @@ public class Ramp implements WorldElement {
     public String getType() {
         return TYPE;
     }
+
+    @Override
+    public boolean isPassable() {
+        return true;
+    }
+
+
 }

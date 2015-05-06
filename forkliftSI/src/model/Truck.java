@@ -1,12 +1,12 @@
 package model;
 
+import model.enums.PackageSize;
+import model.enums.PackageType;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import model.enums.PackageSize;
-import model.enums.PackageType;
 
 public class Truck implements WorldElement {
 
@@ -71,6 +71,11 @@ public class Truck implements WorldElement {
 	@Override
 	public String getType() {
 		return TYPE;
+	}
+
+	@Override
+	public boolean isPassable() {
+		return false;
 	}
 
 	private List<Package> generateRandomPackageList() {

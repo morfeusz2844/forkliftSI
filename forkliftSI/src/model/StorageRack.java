@@ -41,4 +41,9 @@ public class StorageRack implements WorldElement {
 	public String getType() {
 			return TYPE;
 	}
+
+	@Override
+	public boolean isPassable() {
+		return false;
+	}
 }

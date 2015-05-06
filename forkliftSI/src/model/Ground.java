@@ -39,4 +39,10 @@ public class Ground implements WorldElement {
 	public String getType() {
 		return TYPE;
 	}
+
+	@Override
+	public boolean isPassable() {
+		if(leftSpace<5) return false;
+		else return true;
+	}
 }
