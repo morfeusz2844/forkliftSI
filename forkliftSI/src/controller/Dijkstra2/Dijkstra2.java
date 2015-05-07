@@ -4,11 +4,11 @@ import java.util.*;
 
 public class Dijkstra2 {
 
-    public static void runDijkstra(Graph.Edge[] edges, String start, String end) {
+    public static StringBuilder runDijkstra(Graph.Edge[] edges, String start, String end) {
         System.out.println("Edges in Dijkstra : " + edges.length);
         Graph g = new Graph(edges);
         g.dijkstra(start);
-        g.printPath(end);
+        return g.printPath(end);
         //g.printAllPaths();
     }
 }
@@ -50,15 +50,21 @@ class Graph {
             this.name = name;
         }
 
-        private void printPath() {
+        private StringBuilder printPath(StringBuilder sb) {
+
             if (this == this.previous) {
+                sb.append(this.name);
                 System.out.printf("%s", this.name);
             } else if (this.previous == null) {
+                sb.append(this.name+"(unreached");
                 System.out.printf("%s(unreached)", this.name);
             } else {
-                this.previous.printPath();
+                this.previous.printPath(sb);
+                sb.append(" -> " + this.name + " (" + this.dist + ")");
                 System.out.printf(" -> %s(%d)", this.name, this.dist);
             }
+
+            return sb;
         }
 
         public int compareTo(Vertex other) {
@@ -128,20 +134,25 @@ class Graph {
     }
 
     /** Prints a path from the source to the specified vertex */
-    public void printPath(String endName) {
+    public StringBuilder printPath(String endName) {
         if (!graph.containsKey(endName)) {
             System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endName);
-            return;
+            return null;
         }
 
-        graph.get(endName).printPath();
+        StringBuilder sb = new StringBuilder();
+
+        graph.get(endName).printPath(sb);
         System.out.println();
+        System.out.println("StringBuilder = " + sb.toString());
+
+        return sb;
     }
     /** Prints the path from the source to every vertex (output order is not guaranteed) */
-    public void printAllPaths() {
-        for (Vertex v : graph.values()) {
-            v.printPath();
-            System.out.println();
-        }
-    }
+//    public void printAllPaths() {
+//        for (Vertex v : graph.values()) {
+//            v.printPath();
+//            System.out.println();
+//        }
+//    }
 }

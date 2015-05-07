@@ -46,8 +46,12 @@ public class Pathfinder {
             System.out.println(gr.toString());
         }
         System.out.println("Edges in Pathfinder: " + edges.size());
-        Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 10 4","Road 1 5");
 
-        return null;
+        StringBuilder pathString = Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 10 4", "Road 1 5");
+        //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 1 14","Road 1 11");
+        //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 14 4","Road 1 5");
+        //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 14 7","Road 13 8");
+
+        return pathString.toString();
     }
 }

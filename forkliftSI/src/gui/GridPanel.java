@@ -37,7 +37,9 @@ public class GridPanel extends JPanel {
                 String objectType = warehouse.getWorldElement(i, j).getType();
                 cellPanel[i][j].setToolTipText(objectType);
 
-                if (objectType.equals("Package")) {
+                if (objectType.equals("Forklift")){
+                    cellPanel[i][j].setForkliftPositionHere();
+                } else if (objectType.equals("Package")) {
                     cellPanel[i][j].setPackagePositionHere();
                 } else if (objectType.equals("Blank")) {
                     cellPanel[i][j].setBlankPositionHere();

@@ -1,6 +1,6 @@
 package model;
 
-public class Forklift {
+public class Forklift implements WorldElement {
 
 	private static final String TYPE = "Forklift";
 
@@ -75,5 +75,15 @@ public class Forklift {
 
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
+	}
+
+	@Override
+	public String getType() {
+		return "Forklift";
+	}
+
+	@Override
+	public boolean isPassable() {
+		return true;
 	}
 }

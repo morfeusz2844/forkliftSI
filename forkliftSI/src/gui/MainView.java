@@ -4,6 +4,7 @@ import model.Forklift;
 import model.Warehouse;
 import net.miginfocom.swing.MigLayout;
 
+import javax.swing.Timer;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -30,7 +31,7 @@ public class MainView {
 
             logPlace.setEditable(false);
 
-            logPlace.setText("--Start Application ForkliftSI-- \n DUPA");
+            logPlace.setText("--Start Application ForkliftSI-- \n");
 
             JFrame frame = new JFrame("Inteligent ForkLift");
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -41,6 +42,8 @@ public class MainView {
             frame.pack();
             frame.setLocationRelativeTo(null);
             frame.setVisible(true);
+
+            this.autorefresh();
 
         });
     }
@@ -58,7 +61,7 @@ public class MainView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 gridPanel.initializeGeneratedData();
-                logPlace.append("DUUUPA\n");
+                logPlace.append("Click!\n");
             }
         });
 
@@ -72,6 +75,24 @@ public class MainView {
         panel.add(capacityLevel);
         panel.add(refresh);
         return panel;
+    }
+
+    private void autorefresh() {
+        int INTERVAL = 500;
+
+        Timer timer = new Timer(INTERVAL, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+
+                //Refresh the panel
+                gridPanel.initializeGeneratedData();
+//
+//                if (/* condition to terminate the thread. */) {
+//                    timer.stop();
+//                }
+            }
+        });
+
+        timer.start();
     }
 
 }
