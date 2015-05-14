@@ -1,0 +1,16 @@
+unpack nr capacity rack ground
+no none high high high
+no none medium high low
+no none medium medium medium
+yes low low low low
+yes low low medium none
+no low high high high
+no low medium medium medium
+yes medium none none none
+yes medium low medium none
+no medium high high high
+no medium medium high low
+no high high high high
+yes high none none none
+yes high low none medium
+yes high medium high low

@@ -56,7 +56,7 @@ class Graph {
                 sb.append(this.name);
                 System.out.printf("%s", this.name);
             } else if (this.previous == null) {
-                sb.append(this.name+"(unreached");
+                sb.append(this.name+"(unreached)");
                 System.out.printf("%s(unreached)", this.name);
             } else {
                 this.previous.printPath(sb);

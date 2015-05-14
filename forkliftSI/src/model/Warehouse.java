@@ -37,14 +37,22 @@ public class Warehouse {
                     if (j == 0 || j == 14) {
                         warehouseMap[i][j] = new Service();
                     } else {
-                        warehouseMap[i][j] = new Ramp();
+                    	if(j%3==0){
+                    		warehouseMap[i][j] = new Ramp();
+                    	}
+                    	else if(j%3==1){
+                    		warehouseMap[i][j] = new Truck(false);
+                    	}
+                    	else {
+                    		warehouseMap[i][j] = new Truck(true);
+                    	}
                     }
                 } else if (i > 1 && (j == 0 || j == 2 || j == 3 || j == 5 || j == 6)) {
                     warehouseMap[i][j] = new StorageRack();
                 } else if (i == 1 || (i > 1 && (j == 1 || j == 4 || j == 7)) || ((i == 4 || i == 7 || i == 10 || i == 13) && j > 7)) {
                     warehouseMap[i][j] = new Road();
                 } else {
-                    warehouseMap[i][j] = new Blank();
+                    warehouseMap[i][j] = new Ground();
                 }
             }
         }

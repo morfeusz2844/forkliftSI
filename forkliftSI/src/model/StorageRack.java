@@ -8,7 +8,7 @@ import java.util.List;
 public class StorageRack implements WorldElement {
 
 
-	private static final int MAX_CAPACITY = 20;
+	private static final int MAX_CAPACITY = 10;
 	private static final String TYPE = "StorageRack";
 	private int leftSpace;
 
