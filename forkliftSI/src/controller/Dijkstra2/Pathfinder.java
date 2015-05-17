@@ -29,7 +29,9 @@ public class Pathfinder {
                 currentlyProcessed = warehouse.getWorldElement(i, j);
                 if(currentlyProcessed.isPassable()){
                     for(String s : warehouse.getPassableAdjacencies(i,j)){
-                        if(s!=null) adjacencyMap.put(currentlyProcessed.getType() + " " + i + " "  + j, s);
+                        if(s!=null) {
+                            adjacencyMap.put(currentlyProcessed.getType() + " " + i + " " + j, s);
+                        }
                     }
                 }
             }
@@ -47,7 +49,7 @@ public class Pathfinder {
         }
         System.out.println("Edges in Pathfinder: " + edges.size());
 
-        StringBuilder pathString = Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 10 4", "Road 1 5");
+        StringBuilder pathString = Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 14 4", "Road 1 6");
         //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 1 14","Road 1 11");
         //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 14 4","Road 1 5");
         //Dijkstra2.runDijkstra(edges.toArray(new Graph.Edge[edges.size()]), "Road 14 7","Road 13 8");
