@@ -1,5 +1,7 @@
 package gui;
 
+import model.Ground;
+import model.StorageRack;
 import model.Warehouse;
 
 import javax.swing.*;
@@ -35,12 +37,19 @@ public class GridPanel extends JPanel {
         for (int i = 0; i < warehouse.getSizeX(); i++) {
             for (int j = 0; j < warehouse.getSizeY(); j++) {
                 String objectType = warehouse.getWorldElement(i, j).getType();
+                int objectSize;
+                if (objectType== "StorageRack" ){
+                    objectSize = ((StorageRack)warehouse.getWorldElement(i,j)).getLeftSpace();
+                    objectType = objectType+" free space:"+objectSize;
+                } else if(objectType =="Ground"){
+                    objectSize = ((Ground)warehouse.getWorldElement(i,j)).getLeftSpace();
+                    objectType = objectType+" free space:"+objectSize;
+                }
+
                 cellPanel[i][j].setToolTipText(objectType);
 
                 if (objectType.equals("Forklift")){
                     cellPanel[i][j].setForkliftPositionHere();
-                } else if (objectType.equals("Package")) {
-                    cellPanel[i][j].setPackagePositionHere();
                 } else if (objectType.equals("Blank")) {
                     cellPanel[i][j].setBlankPositionHere();
                 } else if (objectType.equals("StorageRack")) {

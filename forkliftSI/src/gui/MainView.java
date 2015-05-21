@@ -85,10 +85,6 @@ public class MainView {
 
                 //Refresh the panel
                 gridPanel.initializeGeneratedData();
-//
-//                if (/* condition to terminate the thread. */) {
-//                    timer.stop();
-//                }
             }
         });
 

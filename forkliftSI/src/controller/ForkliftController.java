@@ -2,9 +2,10 @@ package controller;
 
 import id3.Id3;
 import controller.Dijkstra2.Pathfinder;
-import model.Forklift;
-import model.Warehouse;
-import model.WorldElement;
+import model.*;
+import model.Package;
+import model.enums.PackageSize;
+import model.enums.PackageType;
 
 public class ForkliftController implements Runnable {
 
@@ -40,8 +41,11 @@ public class ForkliftController implements Runnable {
 
 		}*/
 		
-		Id3 id3 = new Id3(warehouse);
-		id3.justTest();
+//		Id3 id3 = new Id3(warehouse);
+//		id3.justTest();
+		Truck truck = new Truck(true);
+
+		GeneticController geneticController = new GeneticController(warehouse,truck);
 
 	}
 

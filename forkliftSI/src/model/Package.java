@@ -11,6 +11,7 @@ public class Package implements WorldElement {
 	private final PackageSize packageSize;
 	private final PackageType packageType;
 
+
 	public Package(PackageSize packageSize, PackageType packageType) {
 		this.packageSize = packageSize;
 		this.packageType = packageType;

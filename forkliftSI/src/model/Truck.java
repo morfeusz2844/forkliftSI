@@ -11,15 +11,30 @@ import java.util.Random;
 public class Truck implements WorldElement {
 
 	private static final String TYPE = "Truck";
-	private static final int MAX_CAPACITY = 30;
+	private static final int MAX_CAPACITY = 5;
 
 	private int capacity;
 	private boolean toUnpacking;
-	private boolean isReady;
+
+	private int positionx;
+	private int positiony;
+
 
 	private List<Package> listOfProducts;
 
 	public Truck(boolean toUnpacking) {
+		this.toUnpacking = toUnpacking;
+		if (toUnpacking) {
+			capacity = MAX_CAPACITY;
+			listOfProducts = generateRandomPackageList();
+		} else {
+			capacity = 0;
+			listOfProducts = new ArrayList<Package>();
+		}
+	}
+	public Truck(boolean toUnpacking, int _x, int _y) {
+		this.positionx=_x;
+		this.positiony=_y;
 		this.toUnpacking = toUnpacking;
 		if (toUnpacking) {
 			capacity = MAX_CAPACITY;
@@ -53,20 +68,6 @@ public class Truck implements WorldElement {
 		}
 	}
 
-	public void addElementToTruck(Package pack) {
-		if (!toUnpacking && !isReady) {
-			listOfProducts.add(pack);
-		}
-	}
-
-	private void checkIfTruckIsReadyToDeparture() {
-		if (toUnpacking && capacity == 0) {
-			isReady = true;
-		} 
-		else if (!toUnpacking && capacity == MAX_CAPACITY) {
-			isReady = true;
-		}
-	}
 
 	@Override
 	public String getType() {
@@ -125,5 +126,10 @@ public class Truck implements WorldElement {
 					"Sth wrong in switch on Package Type");
 		}
 	}
-
+	public int getPositionx(){
+		return this.positionx;
+	}
+	public int getPositiony(){
+		return this.positiony;
+	}
 }
