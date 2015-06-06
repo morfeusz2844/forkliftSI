@@ -1,11 +1,9 @@
 package controller;
 
-import id3.Id3;
-import controller.Dijkstra2.Pathfinder;
-import model.*;
-import model.Package;
-import model.enums.PackageSize;
-import model.enums.PackageType;
+import astar.Astar;
+import model.Forklift;
+import model.Truck;
+import model.Warehouse;
 
 public class ForkliftController implements Runnable {
 
@@ -45,7 +43,10 @@ public class ForkliftController implements Runnable {
 //		id3.justTest();
 		Truck truck = new Truck(true);
 
-		GeneticController geneticController = new GeneticController(warehouse,truck);
+		Astar astar = new Astar(warehouse,forklift);
+		astar.findPath(7,7,1,1);
+
+		//GeneticController geneticController = new GeneticController(warehouse,truck);
 
 	}
 

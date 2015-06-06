@@ -1,7 +1,6 @@
 package model;
 
 
-import gui.GridPanel;
 import model.enums.PackageSize;
 import model.enums.PackageType;
 
@@ -73,6 +72,7 @@ public class Warehouse {
         else return new Blank();
     }
 
+    @Deprecated
     public String[] getPassableAdjacencies(int x, int y) {
 
         String[] adjacencies = new String[4];
@@ -93,7 +93,7 @@ public class Warehouse {
         this.random = new Random();
         for (int i = 1; i < SIZE_X; i++) {
             for (int j = 0; j < SIZE_Y; j++) {
-                if (warehouseMap[i][j].getType() == "StorageRack") {
+                if (warehouseMap[i][j].getType().equals("StorageRack")) {
                     int randomCapacity = random.nextInt(((StorageRack) warehouseMap[i][j]).getMaxCapacity());
                     int randomTypePackage = random.nextInt(3);
                     for (int d = 0; d < randomCapacity; d++) {
@@ -113,7 +113,7 @@ public class Warehouse {
                             }
                         }
                     }
-                } else if (warehouseMap[i][j].getType() == "Ground") {
+                } else if (warehouseMap[i][j].getType().equals("Ground")) {
                     int randomCapacity = random.nextInt(((Ground) warehouseMap[i][j]).getMaxCapacity());
                     int randomTypePackage = random.nextInt(3);
                     int randomSizePackage = random.nextInt(2);
@@ -149,6 +149,11 @@ public class Warehouse {
     }
     public WorldElement[][] getWarehouseMap(){
         return this.warehouseMap;
+    }
+
+    public boolean isPassable(int i, int j) {
+
+        return warehouseMap[i][j].isPassable();
     }
 }
 
