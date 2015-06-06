@@ -19,14 +19,12 @@ public class NeuronNetwork {
                 (SizeOut < 1) || (CountHidden < 1) || (f == null))
         { throw (new Exception("Blad"));};
 
-        // tworzenie odpowiednich warstw...
         lIn = new Layer(SizeIn);
         lOut = new Layer(SizeOut, f);
         lHidden = new Layer[CountHidden];
         for (int i=0; i<CountHidden; i++)
         { lHidden[i] = new Layer(SizeHidden, f); }
 
-        // ...i laczenie ich ze soba.
         lOut.ConnectWithLayer(lHidden[CountHidden - 1]);
         for (int i=(CountHidden-1); i>0; i--)
         {
