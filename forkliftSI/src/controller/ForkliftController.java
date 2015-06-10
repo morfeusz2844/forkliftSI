@@ -1,6 +1,5 @@
 package controller;
 
-import astar.Astar;
 import model.Forklift;
 import model.Truck;
 import model.Warehouse;
