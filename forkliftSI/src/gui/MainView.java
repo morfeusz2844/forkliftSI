@@ -21,7 +21,7 @@ public class MainView {
     public MainView(Warehouse warehouse, Forklift forklift) {
         this.warehouse = warehouse;
         this.forklift = forklift;
-        this.gridPanel = new GridPanel(this.warehouse);
+        this.gridPanel = new GridPanel(this.warehouse,this.forklift);
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

@@ -49,8 +49,8 @@ public class SingleCell extends JPanel {
         setBackground(new Color(150, 250, 50));
     }
 
-    public void setPackagePositionHere() {
-        setBackground(new Color(255, 50, 50));
+    public void setGroundPositionHere() {
+        setBackground(new Color(100, 100, 100));
     }
 
     public void setStorageRackPositionHere() {

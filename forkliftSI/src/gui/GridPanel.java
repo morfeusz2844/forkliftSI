@@ -1,5 +1,6 @@
 package gui;
 
+import model.Forklift;
 import model.Ground;
 import model.StorageRack;
 import model.Warehouse;
@@ -11,11 +12,13 @@ import java.awt.*;
 public class GridPanel extends JPanel {
 
     Warehouse warehouse;
+    Forklift forklift;
 
     SingleCell cellPanel[][];
 
-    public GridPanel(Warehouse warehouse) {
+    public GridPanel(Warehouse warehouse, Forklift forklift) {
         this.warehouse = warehouse;
+        this.forklift=forklift;
         cellPanel = new SingleCell[warehouse.getSizeX()][warehouse.getSizeY()];
         initializeGridView();
         initializeGeneratedData();
@@ -37,17 +40,19 @@ public class GridPanel extends JPanel {
         for (int i = 0; i < warehouse.getSizeX(); i++) {
             for (int j = 0; j < warehouse.getSizeY(); j++) {
                 String objectType = warehouse.getWorldElement(i, j).getType();
+                String toolTipType = warehouse.getWorldElement(i, j).getType();
+
                 int objectSize;
                 if (objectType== "StorageRack" ){
                     objectSize = ((StorageRack)warehouse.getWorldElement(i,j)).getLeftSpace();
-                    objectType = objectType+" free space:"+objectSize;
+                    toolTipType = toolTipType+" free space:"+objectSize;
                 } else if(objectType =="Ground"){
                     objectSize = ((Ground)warehouse.getWorldElement(i,j)).getLeftSpace();
-                    objectType = objectType+" free space:"+objectSize;
+                    toolTipType = toolTipType+" free space:"+objectSize;
                 }
 
-                cellPanel[i][j].setToolTipText(objectType);
-
+                cellPanel[i][j].setToolTipText(toolTipType);
+                cellPanel[forklift.getPositionY()][forklift.getPositionX()].setForkliftPositionHere();
                 if (objectType.equals("Forklift")){
                     cellPanel[i][j].setForkliftPositionHere();
                 } else if (objectType.equals("Blank")) {
@@ -60,6 +65,8 @@ public class GridPanel extends JPanel {
                     cellPanel[i][j].setRampPositionHere();
                 } else if (objectType.equals("Road")){
                     cellPanel[i][j].setRoadPositionHere();
+                } else if (objectType.equals("Ground")){
+                    cellPanel[i][j].setGroundPositionHere();
                 }
             }
         }

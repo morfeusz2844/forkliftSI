@@ -46,6 +46,11 @@ public class ForkliftController implements Runnable {
 //		Id3 id3 = new Id3(warehouse);
 //		id3.justTest();
         Truck truck = new Truck(true);
+        try {
+            moveForklift(12,1);
+        } catch (DestinationUnreachableException e) {
+
+        }
 
         //GeneticController geneticController = new GeneticController(warehouse, truck);
 
