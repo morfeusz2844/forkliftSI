@@ -14,6 +14,7 @@ import java.util.List;
 public class GeneticController {
     private Truck truck;
     private List<Place> placeMap = new ArrayList<>();
+    private List<int[]> productPlaces = new ArrayList<>();
 
 
     private List<PackageGA> listOfPackageToUnload = new ArrayList<>();
@@ -29,6 +30,24 @@ public class GeneticController {
             System.out.println("NAJLEPSZY W POP LEVEL "+i+": "+pop.getFittest().getFitness());
         }
         System.out.println("NAJLEPSZY PO WSZYSTKIM: "+pop.getFittest().getFitness());
+
+        WarehouseMapGA thebest = pop.getFittest();
+        List<PackageGA> packageList;
+        int element=0;
+        while (element<truck.getListOfProducts().size()){
+            for(Place place : thebest.getPlaceMap()){
+                packageList = place.getPackageList();
+                for(PackageGA pack: packageList){
+                    if (pack.getIdentication()==element){
+                        int temp[] = {place.getPositionX(),place.getPositionY()};
+                        System.out.println(place.getPositionX()+" "+place.getPositionX());
+                        productPlaces.add(temp);
+                    }
+                }
+            }
+            element++;
+        }
+
     }
 
     private List<Place> generatePlaceMap(Warehouse _warehouse) {
@@ -74,5 +93,8 @@ public class GeneticController {
         for (PackageGA temp : this.listOfPackageToUnload) {
             System.out.println(temp.toString());
         }
+    }
+    public List<int[]> getProductPlaces(){
+        return this.productPlaces;
     }
 }
