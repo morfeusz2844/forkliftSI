@@ -44,7 +44,7 @@ public class ForkliftController implements Runnable {
 		Truck truck = new Truck(true);
 
 		Astar astar = new Astar(warehouse,forklift);
-		astar.findPath(7,7,1,1);
+		astar.findPath(7,7,2,2);
 
 		//GeneticController geneticController = new GeneticController(warehouse,truck);
 
