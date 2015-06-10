@@ -22,62 +22,109 @@ public class Astar {
 
     public void findPath(int startX, int startY, int destinationX, int destinationY) {
 
-       Comparator<Node> nodeComparator = (o1, o2) -> o1.getF() - o2.getF();
+        Comparator<Node> nodeComparator = (o1, o2) -> o1.getF() - o2.getF();
 
         ArrayList<Node> openList = new ArrayList<>();
         List<Node> closedList = new ArrayList<>();
 
         Node destinationNode = passableMap[destinationX][destinationY];
+
         Node currentNode = passableMap[startX][startY];
+
+        if (!destinationNode.isPassable()) {
+
+            List<Node> adjacencies = new ArrayList<>();
+            Node justAnotherTempNode;
+            if (destinationNode.getPosX() - 1 >= 0) {
+                justAnotherTempNode = passableMap[destinationNode.getPosX() - 1][destinationNode.getPosY()];
+                if (justAnotherTempNode.isPassable())
+                    adjacencies.add(justAnotherTempNode);
+            }
+            if (destinationNode.getPosX() + 1 <= warehouse.getSizeX() - 1) {
+                justAnotherTempNode = passableMap[destinationNode.getPosX() + 1][destinationNode.getPosY()];
+                if (justAnotherTempNode.isPassable())
+                    adjacencies.add(justAnotherTempNode);
+            }
+            if (destinationNode.getPosY() - 1 >= 0) {
+                justAnotherTempNode = passableMap[destinationNode.getPosX()][destinationNode.getPosY() - 1];
+                if (justAnotherTempNode.isPassable())
+                    adjacencies.add(justAnotherTempNode);
+            }
+            if (destinationNode.getPosY() + 1 <= warehouse.getSizeY() + 1) {
+                justAnotherTempNode = passableMap[destinationNode.getPosX()][destinationNode.getPosY() + 1];
+                if (justAnotherTempNode.isPassable())
+                    adjacencies.add(justAnotherTempNode);
+            }
+            if(adjacencies.isEmpty()){
+                System.out.println("A* = Punkt docelowy nieosiÄ…galny");
+                return;
+            }
+            for(Node n : adjacencies){
+                n.setH(Manhattan(currentNode,n));
+            }
+            destinationNode = adjacencies.get(0);
+            for(Node n : adjacencies){
+                if(n.getH() < currentNode.getH() ){
+                    destinationNode = n;
+                }
+            }
+        }
+
         currentNode.setH(Manhattan(currentNode, destinationNode));
-        // dodajemy punkt pocz¹tkowy do listy otwartych
 
         openList.add(currentNode);
 
-        // dodajemy punkty s¹siaduj¹ce, przez które mo¿na przejœæ, do listy otwartych
-
         Node tempNode;
 
-        while(!openList.isEmpty() && !closedList.contains(destinationNode)) {
+        while (!openList.isEmpty() && !closedList.contains(destinationNode)) {
 
-            tempNode = passableMap[currentNode.getPosX() - 1][currentNode.getPosY()];
-            if (tempNode.isPassable() && !closedList.contains(tempNode))
-                if (openList.contains(tempNode)) {
+            if (currentNode.getPosX() - 1 >= 0) {
+                tempNode = passableMap[currentNode.getPosX() - 1][currentNode.getPosY()];
+                if (tempNode.isPassable() && !closedList.contains(tempNode))
+                    if (openList.contains(tempNode)) {
 
-                    if (tempNode.getG() > currentNode.getG()+tempNode.getCost()){
-                        tempNode.setG(currentNode.getG()+tempNode.getCost()).setParent(currentNode);
-                    }
+                        if (tempNode.getG() > currentNode.getG() + tempNode.getCost()) {
+                            tempNode.setG(currentNode.getG() + tempNode.getCost()).setParent(currentNode);
+                        }
 
-                } else {
-                    openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
-                }
-            tempNode = passableMap[currentNode.getPosX() + 1][currentNode.getPosY()];
-            if (tempNode.isPassable() && !closedList.contains(tempNode))
-                if (openList.contains(tempNode)) {
-                    if (tempNode.getG() > currentNode.getG()+tempNode.getCost()){
-                        tempNode.setG(currentNode.getG()+tempNode.getCost()).setParent(currentNode);
+                    } else {
+                        openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
                     }
-                } else {
-                    openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
-                }
-            tempNode = passableMap[currentNode.getPosX()][currentNode.getPosY() - 1];
-            if (tempNode.isPassable() && !closedList.contains(tempNode))
-                if (openList.contains(tempNode)) {
-                    if (tempNode.getG() > currentNode.getG()+tempNode.getCost()){
-                        tempNode.setG(currentNode.getG()+tempNode.getCost()).setParent(currentNode);
+            }
+
+            if (currentNode.getPosX() + 1 <= warehouse.getSizeX() - 1) {
+                tempNode = passableMap[currentNode.getPosX() + 1][currentNode.getPosY()];
+                if (tempNode.isPassable() && !closedList.contains(tempNode))
+                    if (openList.contains(tempNode)) {
+                        if (tempNode.getG() > currentNode.getG() + tempNode.getCost()) {
+                            tempNode.setG(currentNode.getG() + tempNode.getCost()).setParent(currentNode);
+                        }
+                    } else {
+                        openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
                     }
-                } else {
-                    openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
-                }
-            tempNode = passableMap[currentNode.getPosX()][currentNode.getPosY() + 1];
-            if (tempNode.isPassable() && !closedList.contains(tempNode))
-                if (openList.contains(tempNode)) {
-                    if (tempNode.getG() > currentNode.getG()+tempNode.getCost()){
-                        tempNode.setG(currentNode.getG()+tempNode.getCost()).setParent(currentNode);
+            }
+            if (currentNode.getPosY() - 1 >= 0) {
+                tempNode = passableMap[currentNode.getPosX()][currentNode.getPosY() - 1];
+                if (tempNode.isPassable() && !closedList.contains(tempNode))
+                    if (openList.contains(tempNode)) {
+                        if (tempNode.getG() > currentNode.getG() + tempNode.getCost()) {
+                            tempNode.setG(currentNode.getG() + tempNode.getCost()).setParent(currentNode);
+                        }
+                    } else {
+                        openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
                     }
-                } else {
-                    openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
-                }
+            }
+            if (currentNode.getPosY() + 1 <= warehouse.getSizeY() - 1) {
+                tempNode = passableMap[currentNode.getPosX()][currentNode.getPosY() + 1];
+                if (tempNode.isPassable() && !closedList.contains(tempNode))
+                    if (openList.contains(tempNode)) {
+                        if (tempNode.getG() > currentNode.getG() + tempNode.getCost()) {
+                            tempNode.setG(currentNode.getG() + tempNode.getCost()).setParent(currentNode);
+                        }
+                    } else {
+                        openList.add(tempNode.setParent(currentNode).setG(currentNode.getG() + tempNode.getCost()).setH(Manhattan(tempNode, destinationNode)));
+                    }
+            }
             openList.remove(currentNode);
             closedList.add(currentNode);
 
@@ -91,8 +138,8 @@ public class Astar {
         System.out.println(openList);
         System.out.println(closedList);
 
-        Node finish = closedList.get(closedList.size()-1);
-        while(finish.getParent()!=null){
+        Node finish = closedList.get(closedList.size() - 1);
+        while (finish.getParent() != null) {
             System.out.println("Path should look like this:");
             System.out.println(finish);
             finish = finish.getParent();
