@@ -20,7 +20,9 @@ public class Astar {
         this.passableMap = preparePassableMap(this.warehouse);
     }
 
-    public void findPath(int startX, int startY, int destinationX, int destinationY) {
+    public List<Node> findPath(int startX, int startY, int destinationX, int destinationY) {
+
+        List<Node> finalResult = new ArrayList<>();
 
         Comparator<Node> nodeComparator = (o1, o2) -> o1.getF() - o2.getF();
 
@@ -55,16 +57,16 @@ public class Astar {
                 if (justAnotherTempNode.isPassable())
                     adjacencies.add(justAnotherTempNode);
             }
-            if(adjacencies.isEmpty()){
+            if (adjacencies.isEmpty()) {
                 System.out.println("A* = Punkt docelowy nieosiągalny");
-                return;
+                return null;
             }
-            for(Node n : adjacencies){
-                n.setH(Manhattan(currentNode,n));
+            for (Node n : adjacencies) {
+                n.setH(Manhattan(currentNode, n));
             }
             destinationNode = adjacencies.get(0);
-            for(Node n : adjacencies){
-                if(n.getH() < currentNode.getH() ){
+            for (Node n : adjacencies) {
+                if (n.getH() < currentNode.getH()) {
                     destinationNode = n;
                 }
             }
@@ -135,15 +137,18 @@ public class Astar {
             System.out.println(closedList);
         }
 
-        System.out.println(openList);
         System.out.println(closedList);
 
         Node finish = closedList.get(closedList.size() - 1);
         while (finish.getParent() != null) {
+
+            finalResult.add(finish);
             System.out.println("Path should look like this:");
             System.out.println(finish);
             finish = finish.getParent();
         }
+        finalResult.add(finish);
+        return finalResult;
     }
 
     private static int Manhattan(Node begin, Node end) {
