@@ -3,6 +3,7 @@ package model;
 import model.enums.PackageSize;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Ground implements WorldElement {
@@ -33,6 +34,18 @@ public class Ground implements WorldElement {
             items.add(pack);
             leftSpace= leftSpace - pack.getPackageSize().getValue();
         }
+    }
+    
+    public Package pickPackage(){
+    	Iterator<Package> iterator = items.iterator();
+		if (iterator.hasNext()) {
+			Package next = iterator.next();
+			iterator.remove();
+			leftSpace = leftSpace + next.getPackageSize().getValue();
+			return next;
+		} else {
+			return null;
+		}
     }
 
     @Override

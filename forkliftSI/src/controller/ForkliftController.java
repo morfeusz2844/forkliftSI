@@ -33,9 +33,29 @@ public class ForkliftController implements Runnable {
     	while(programDoesNotMakeAnySense){
     		
     		Id3 id3 = new Id3(warehouse);
-    		//String prediction = id3.getPrediction();
+    		String prediction = id3.getPrediction();
     		
-    		//if(prediction.equals("no")){
+    		if(prediction.equals("no")){
+    			Truck truckToPack = id3.getTruckToPack();
+    			int[] position = id3.findPlaceForPackingToTruck();
+    			try {
+					moveForklift(position[1], position[0]);
+					WorldElement worldElement = warehouse.getWorldElement(position[0], position[1]);
+					Package pack = null;
+					if(worldElement.getType().equals("StorageRack")){
+						pack = ((StorageRack)worldElement).pickPackage();
+					}
+					else if(worldElement.getType().equals("Ground")){
+						pack = ((Ground)worldElement).pickPackage();
+					}
+					forklift.pickElement(pack);
+					moveForklift(truckToPack.getPositiony(), truckToPack.getPositionx());
+					truckToPack.addPackage(pack);
+				} catch (DestinationUnreachableException e) {
+					e.printStackTrace();
+				}
+	
+    		} else if (prediction.equals("yes")) {
     			Truck truckToUnpack = id3.getTruckToUnpack();
     			
     			GeneticController geneticController = new GeneticController(warehouse, truckToUnpack);
@@ -61,8 +81,8 @@ public class ForkliftController implements Runnable {
 						e.printStackTrace();
 					}
     			}
-
-    	}
+    		}
+    }
     }
 
     private void moveForklift(int destinationX, int destinationY) throws DestinationUnreachableException {

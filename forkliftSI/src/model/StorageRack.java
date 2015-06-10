@@ -3,6 +3,7 @@ package model;
 import model.enums.PackageSize;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class StorageRack implements WorldElement {
@@ -39,6 +40,18 @@ public class StorageRack implements WorldElement {
             leftSpace = leftSpace - pack.getPackageSize().getValue();
 
         }
+    }
+    
+    public Package pickPackage(){
+    	Iterator<Package> iterator = items.iterator();
+		if (iterator.hasNext()) {
+			Package next = iterator.next();
+			iterator.remove();
+			leftSpace = leftSpace + next.getPackageSize().getValue();
+			return next;
+		} else {
+			return null;
+		}
     }
 
     public int getLeftSpace() {

@@ -44,6 +44,16 @@ public class Truck implements WorldElement {
 			listOfProducts = new ArrayList<Package>();
 		}
 	}
+	
+	public void addPackage(Package pack){
+		if (pack != null && capacity < 5) {
+            listOfProducts.add(pack);
+            capacity++;
+            if(capacity == 5){
+            	toUnpacking = true;
+            }
+        }
+	}
 
 	public int getCapacity() {
 		return capacity;
@@ -62,6 +72,10 @@ public class Truck implements WorldElement {
 		if (iterator.hasNext()) {
 			Package next = iterator.next();
 			iterator.remove();
+			capacity--;
+			if(capacity == 0){
+				toUnpacking = false;
+			}
 			return next;
 		} else {
 			return null;

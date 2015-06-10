@@ -55,6 +55,22 @@ public class Id3 {
 		System.out.println(prediction);
 	}
 	
+	public int[] findPlaceForPackingToTruck(){
+		WorldElement currentlyProcessed;
+		for (int i = 0; i < warehouse.getSizeX(); i++) {
+			for (int j = 0; j < warehouse.getSizeY(); j++) {
+				currentlyProcessed = warehouse.getWorldElement(i, j);
+				if (currentlyProcessed.getType().equals("StorageRack")
+						&& ((StorageRack)currentlyProcessed).getLeftSpace() < 6) {
+					return new int[] {i, j};
+				} else if (currentlyProcessed.getType().equals("Ground") && ((Ground)currentlyProcessed).getLeftSpace() < 12) {
+					return new int[] {i, j};
+				}
+			}
+		}
+		return null;
+	}
+	
 	public Truck getTruckToUnpack(){
 		List<Truck> trucks = new ArrayList<Truck>();
 		Truck truck;
