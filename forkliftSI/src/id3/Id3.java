@@ -5,6 +5,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import model.Ground;
 import model.Package;
@@ -24,6 +25,8 @@ public class Id3 {
 	private int MAX_STORAGERACK_CAPACITY = 13 * 5 * 10;
 	private Warehouse warehouse;
 
+	private String prediction;
+	
 	public Id3(Warehouse warehouse) {
 		this.warehouse = warehouse;
 		prepareTruckLaneInformations();
@@ -45,11 +48,49 @@ public class Id3 {
 		String[] instance = { null, countNumberOfTrucksToUnpack(),
 				countOverallCapacityInWarehouse(),
 				countCapacityOnStorageRacks(), countCapacityOnGround() };
-		String prediction = tree.predictTargetAttributeValue(instance);
+		prediction = tree.predictTargetAttributeValue(instance);
 		tree.print();
 		algo.printStatistics();
 		System.out.println("The class that is predicted is: " + prediction);
 		System.out.println(prediction);
+	}
+	
+	public Truck getTruckToUnpack(){
+		List<Truck> trucks = new ArrayList<Truck>();
+		Truck truck;
+		WorldElement currentlyProcessed;
+		for (int i = 1; i < warehouse.getSizeX() - 1; i++) {
+			currentlyProcessed = warehouse.getWorldElement(0, i);
+			if (currentlyProcessed.getType().equals("Truck")) {
+				truck = (Truck) currentlyProcessed;
+				if(truck.isToUnpacking())
+					truck.setPositionx(0);
+					truck.setPositiony(i);
+					trucks.add(truck);
+			}
+		}
+		Random random = new Random();
+		return trucks.get(random.nextInt(trucks.size()));
+	}
+	
+	public Truck getTruckToPack(){
+		List<Truck> trucks = new ArrayList<Truck>();
+		Truck truck;
+		WorldElement currentlyProcessed;
+		for (int i = 1; i < warehouse.getSizeX() - 1; i++) {
+			currentlyProcessed = warehouse.getWorldElement(0, i);
+			if (currentlyProcessed.getType().equals("Truck")) {
+				truck = (Truck) currentlyProcessed;
+				if(! truck.isToUnpacking())
+					trucks.add(truck);
+			}
+		}
+		Random random = new Random();
+		return trucks.get(random.nextInt(trucks.size()));
+	}
+
+	public String getPrediction() {
+		return prediction;
 	}
 
 	public static String fileToPath(String filename)

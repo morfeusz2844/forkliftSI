@@ -169,7 +169,7 @@ public class Astar {
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
 
-                map[j][i] = new Node(j, i, warehouse.isPassable(i, j));
+                map[i][j] = new Node(i, j, warehouse.isPassable(i, j));
             }
         }
 

@@ -25,11 +25,19 @@ public class StorageRack implements WorldElement {
 
     public void addPackage(Package pack) {
         if (pack != null
-                && leftSpace > 0
+                && leftSpace > 1
                 && (pack.getPackageSize().equals(PackageSize.MEDIUM) || pack
                 .getPackageSize().equals(PackageSize.SMALL))) {
             items.add(pack);
             leftSpace = leftSpace - pack.getPackageSize().getValue();
+        }
+        else if (pack != null
+                && leftSpace == 1
+                && pack
+                .getPackageSize().equals(PackageSize.SMALL)){
+        	items.add(pack);
+            leftSpace = leftSpace - pack.getPackageSize().getValue();
+
         }
     }
 

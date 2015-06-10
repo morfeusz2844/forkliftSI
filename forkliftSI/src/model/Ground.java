@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ground implements WorldElement {
-    private static final int MAX_CAPACITY = 5;
+    private static final int MAX_CAPACITY = 20;
     private static final String TYPE = "Ground";
 
 

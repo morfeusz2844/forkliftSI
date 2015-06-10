@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Forklift implements WorldElement {
 
 	private static final String TYPE = "Forklift";
@@ -7,12 +11,15 @@ public class Forklift implements WorldElement {
 	private final static int MAX_FUEL = 100;
 	private final static int STARTING_POSITION_X = 0;
 	private final static int STARTING_POSITION_Y = 0;
+	private static final int MAX_CAPACITY = 5;
 	private int positionX;
 	private int positionY;
 
-	private int capacity;
-
+	private int capacity = 0;
+	
 	private int fuelLevel;
+	
+	private Package carriedPackage = null;
 
 	private WorldElement carriedWorldElement;
 
@@ -37,12 +44,22 @@ public class Forklift implements WorldElement {
 		this.fuelLevel = fuelLevel;
 	}
 
-	public void pickElement(){
-
+	public void pickElement(Package pack){
+		setCarriedPackage(pack);
 	}
 
-	public void dropElement(){
+	public Package dropElement(){
+		Package pack = carriedPackage;
+		carriedPackage = null;
+		return pack;
+	}
 
+	public Package getCarriedPackage() {
+		return carriedPackage;
+	}
+
+	public void setCarriedPackage(Package carriedPackage) {
+		this.carriedPackage = carriedPackage;
 	}
 
 	public int getPositionX() {

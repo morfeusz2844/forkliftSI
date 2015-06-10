@@ -1,18 +1,26 @@
 package controller;
 
+import id3.Id3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Forklift;
+import model.Package;
+import model.StorageRack;
+import model.Ground;
+import model.Truck;
+import model.Warehouse;
+import model.WorldElement;
 import astar.Astar;
 import astar.DestinationUnreachableException;
 import astar.Node;
-import model.Forklift;
-import model.Truck;
-import model.Warehouse;
-
-import java.util.ArrayList;
 
 public class ForkliftController implements Runnable {
 
     Warehouse warehouse;
     Forklift forklift;
+    private boolean programDoesNotMakeAnySense = true; 
 
     public ForkliftController(Warehouse warehouse, Forklift forklift) {
         this.warehouse = warehouse;
@@ -21,39 +29,40 @@ public class ForkliftController implements Runnable {
 
     @Override
     public void run() {
+    	
+    	while(programDoesNotMakeAnySense){
+    		
+    		Id3 id3 = new Id3(warehouse);
+    		//String prediction = id3.getPrediction();
+    		
+    		//if(prediction.equals("no")){
+    			Truck truckToUnpack = id3.getTruckToUnpack();
+    			
+    			GeneticController geneticController = new GeneticController(warehouse, truckToUnpack);
+    			List<int[]> productPlaces = geneticController.getProductPlaces();
+    			
+    			for(int[] positions : productPlaces){
+    				try {
+    					moveForklift(truckToUnpack.getPositiony(), truckToUnpack.getPositionx());
+    					forklift.pickElement(truckToUnpack.takeElementFromTruck());
+						moveForklift(positions[1], positions[0]);
+						WorldElement worldElement = warehouse.getWorldElement(positions[0], positions[1]);
+						Package pack = forklift.dropElement();
+						if(worldElement.getType().equals("StorageRack")){
+							StorageRack rack = (StorageRack)worldElement;
+							rack.addPackage(pack);
+						}
+						else if(worldElement.getType().equals("Ground")){
+							Ground ground = (Ground)worldElement;
+							ground.addPackage(pack);
+						}
+						
+					} catch (DestinationUnreachableException e) {
+						e.printStackTrace();
+					}
+    			}
 
-        // test wyœwietlania
-
-		/*Pathfinder pathfinder = new Pathfinder(warehouse);
-        String path = pathfinder.findPath();
-		WorldElement tempWorldElement;
-		String[] pathNodes = path.split("-> ");
-		for (String s : pathNodes) {
-			System.out.println(s);
-			int x = Integer.parseInt(s.split(" ")[1]);
-			int y = Integer.parseInt(s.split(" ")[2]);
-			tempWorldElement = warehouse.getWorldElement(x, y);
-			warehouse.addWorldElement(forklift, x, y);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			warehouse.addWorldElement(tempWorldElement, x, y);
-
-		}*/
-
-//		Id3 id3 = new Id3(warehouse);
-//		id3.justTest();
-        Truck truck = new Truck(true);
-        try {
-            moveForklift(12,1);
-        } catch (DestinationUnreachableException e) {
-
-        }
-
-        //GeneticController geneticController = new GeneticController(warehouse, truck);
-
+    	}
     }
 
     private void moveForklift(int destinationX, int destinationY) throws DestinationUnreachableException {

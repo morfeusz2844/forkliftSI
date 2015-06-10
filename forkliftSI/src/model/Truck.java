@@ -126,6 +126,14 @@ public class Truck implements WorldElement {
 					"Sth wrong in switch on Package Type");
 		}
 	}
+	
+	
+	public void setPositionx(int positionx) {
+		this.positionx = positionx;
+	}
+	public void setPositiony(int positiony) {
+		this.positiony = positiony;
+	}
 	public int getPositionx(){
 		return this.positionx;
 	}
