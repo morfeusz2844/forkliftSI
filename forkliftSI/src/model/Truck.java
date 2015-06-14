@@ -1,8 +1,6 @@
 package model;
-
-import model.enums.PackageSize;
-import model.enums.PackageType;
-
+ import model.enums.PackageSize;
+ import model.enums.PackageType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

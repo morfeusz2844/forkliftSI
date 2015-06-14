@@ -14,7 +14,7 @@ public class ForkliftSI {
         Warehouse warehouse = new Warehouse();
         Forklift forklift = new Forklift();
 
-        EventQueue.invokeLater(() -> new MainView(warehouse, forklift));
+        //EventQueue.invokeLater(() -> new MainView(warehouse, forklift));
 
         ForkliftController controller = new ForkliftController(warehouse, forklift);
         controller.run();

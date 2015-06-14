@@ -23,8 +23,7 @@ public class Layer {
         if ((CountN < 1) || (f == null))
         { throw (new Exception("Blad"));  }
         Neurony = new ArrayList();
-        for (int i=0; i<CountN; i++) { AddNeuron(new Neuron(f));
-        }
+        for (int i=0; i<CountN; i++) { AddNeuron(new Neuron(f));}
     }
 
     public void AddNeuron(Neuron N) throws Exception {

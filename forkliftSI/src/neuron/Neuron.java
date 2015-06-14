@@ -38,6 +38,14 @@ public class Neuron {
         In.add(new Connectivity(N, 1.0));
     }
 
+    public void AddIn(Layer W) throws Exception {
+        if (W == null) { throw (new Exception("Blad"));};
+        for(Neuron N : W.Neurony)
+        {
+            AddIn(N);
+        }
+    }
+
     public void RandomWeight(double Min, double Max, Random R) throws Exception {
         if ((R == null) || (Max <= Min))
         { throw (new Exception("Blad"));  };
@@ -71,14 +79,6 @@ public class Neuron {
             p.Weight += WspUczenia * Error * Function.CalculateDerivative(Out) * p.N.Out;
         }
         BiasWeight += WspUczenia * Error * Function.CalculateDerivative(Out) * 1.0;
-    }
-
-    public void AddIn(Layer W) throws Exception {
-        if (W == null) { throw (new Exception("Blad"));};
-        for(Neuron N : W.Neurony)
-        {
-            AddIn(N);
-        }
     }
 
     public void RollUpErrorBack()
